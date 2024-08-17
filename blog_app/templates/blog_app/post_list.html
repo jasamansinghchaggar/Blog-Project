@@ -1,15 +1,17 @@
-<!DOCTYPE html>
 {% extends 'blog_app/base.html' %}
 {% block body_block %}
-<div class="jumbotron">
+    <h1>Blog Posts</h1>
+    {% if post_list %}
     {% for post in post_list %}
     <div class="post">
         <h1><a href="{% url 'blog_app:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
         <div class="date">
             <p>Published on: {{ post.published_date }}</p>
         </div>
-        <a href="{% url 'blog_app:post_detail' pk=post.pk %}">Comments: {{ post.comments.counts }}</a>
+        <a href="{% url 'blog_app:post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
     </div>
     {% endfor %}
-</div>
+    {% else %}
+    <p>No posts uploaded.</p>
+    {% endif %}
 {% endblock %}

@@ -1,13 +1,15 @@
-<!DOCTYPE html>
 {% extends 'blog_app/base.html' %}
 {% block body_block %}
-<div class="jumbotron">
-    {% for post in posts %}
+    <h1>Drafts</h1>
+    {% if draft_list %}
+    {% for post in draft_list %}
     <div class="post">
-        <p class="date">Created: {{ post.create_date:"d-m-Y" }}</p>
-        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-        <p>{{ post.text|truncatechers:200 }}</p>
+        <h1><a href="{% url 'blog_app:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+        <p class="date">Created: {{ post.create_date|date:"d-m-Y" }}</p>
+        <p>{{ post.text|truncatechars:200 }}</p>
+    </div>
     {% endfor %}
-
-</div>
+    {% else %}
+    <p>No drafts uploaded.</p>
+    {% endif %}
 {% endblock %}

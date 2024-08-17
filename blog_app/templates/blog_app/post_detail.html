@@ -11,30 +11,39 @@
     {% endif %}
     <p> {{ post.text }} </p>
 
-    
     {% if user.is_authenticated %}
+    {% if not post.published_date %}
     <a href="{% url 'blog_app:post_publish' pk=post.pk %}" class="btn btn-primary">Publish</a>
+    {% endif %}
+    {% if post.published_date %}
     <a href="{% url 'blog_app:post_edit' pk=post.pk %}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
     <a href="{% url 'blog_app:post_remove' pk=post.pk %}" class="btn btn-outline-primary"><i
             class="bi bi-x-square"></i></a>
+    <hr>
+    <a href="{% url 'blog_app:post_comment' pk=post.pk  %}">Add comment</a>
+    {% endif %}
     {% endif %}
 
-    <hr>
 
-    <a href="{% url 'blog_app:post_comment' pk=post.pk  %}">Add comment</a>
     <div class="container">
+        {% if post.comments.all %}
         {% for comment in post.comments.all %}
         <br>
-        {% if user.is_authenticated or comment.approved_comment %}
-        {{ comment.create_date }}
-        {% if not comment.comment_approve %}
-        <a href="{% url 'blog_app:comment_approve' pk=comment.pk %}" class="btn btn-primary">Post</a>
-        <a href="{% url 'blog_app:comment_remove' pk=comment.pk %}" class="btn btn-outline-primary">Cancel</a>
-        {% endif %}
-        {% endif %}
+        <p>{{ comment.create_date }}</p>
         <p>{{ comment.text }}</p>
-        <p>Published by: {{ comment.author }}</p>
+        <p>commented by: {{ comment.author }}</p>
+        {% if user.is_authenticated %}
+        {% if comment.approved_comment %}
+        <a href="{% url 'blog_app:comment_remove' pk=comment.pk %}" class="btn btn-outline-primary">delete</a>
+        {% else %}
+        <a href="{% url 'blog_app:comment_approve' pk=comment.pk %}" class="btn btn-primary">Post</a>
+        <a href="{% url 'blog_app:comment_remove' pk=comment.pk %}" class="btn btn-outline-primary">cancel</a>
+        {% endif %}
+        {% endif %}
         {% endfor %}
+        {% else %}
+        <p>No comments yet.</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
