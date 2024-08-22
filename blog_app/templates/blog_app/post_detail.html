@@ -1,45 +1,45 @@
-<!DOCTYPE html>
 {% extends 'blog_app/base.html' %}
 {% block body_block %}
-<div class="jumbotron">
-    <h1>{{ post.title }}</h1>
-    {% if post.published_date %}
-    <div>
-        <p>Published: {{ post.published_date }}</p>
+<div id="postdetail">
+    <div class="detail">
+        <h1>{{ post.title }}</h1>
+        {% if post.published_date %}
+        <div>
+            <p>Published: {{ post.published_date }}</p>
+        </div>
+        {% else %}
+        {% endif %}
+        <p class="post-text"> {{ post.text }} </p>
+
+        {% if user.is_authenticated %}
+        {% if not post.published_date %}
+        <a href="{% url 'blog_app:post_publish' pk=post.pk %}" class="btn ">Publish</a>
+        {% endif %}
+        {% if post.published_date %}
+        <a href="{% url 'blog_app:post_edit' pk=post.pk %}" class="btn ">Update</a>
+        <a href="{% url 'blog_app:post_remove' pk=post.pk %}" class="btn delete">Delete</a>
+        <hr>
+        <a href="{% url 'blog_app:post_comment' pk=post.pk  %}" class="btn outline">Add comment</a>
+        {% endif %}
+        {% endif %}
     </div>
-    {% else %}
-    {% endif %}
-    <p> {{ post.text }} </p>
 
-    {% if user.is_authenticated %}
-    {% if not post.published_date %}
-    <a href="{% url 'blog_app:post_publish' pk=post.pk %}" class="btn btn-primary">Publish</a>
-    {% endif %}
-    {% if post.published_date %}
-    <a href="{% url 'blog_app:post_edit' pk=post.pk %}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-    <a href="{% url 'blog_app:post_remove' pk=post.pk %}" class="btn btn-outline-primary"><i
-            class="bi bi-x-square"></i></a>
-    <hr>
-    <a href="{% url 'blog_app:post_comment' pk=post.pk  %}">Add comment</a>
-    {% endif %}
-    {% endif %}
-
-
-    <div class="container">
+    <div class="comments">
         {% if post.comments.all %}
         {% for comment in post.comments.all %}
-        <br>
-        <p>{{ comment.create_date }}</p>
-        <p>{{ comment.text }}</p>
-        <p>commented by: {{ comment.author }}</p>
-        {% if user.is_authenticated %}
-        {% if comment.approved_comment %}
-        <a href="{% url 'blog_app:comment_remove' pk=comment.pk %}" class="btn btn-outline-primary">delete</a>
-        {% else %}
-        <a href="{% url 'blog_app:comment_approve' pk=comment.pk %}" class="btn btn-primary">Post</a>
-        <a href="{% url 'blog_app:comment_remove' pk=comment.pk %}" class="btn btn-outline-primary">cancel</a>
-        {% endif %}
-        {% endif %}
+        <div class="comment">
+            <h3>{{ comment.text }}</h3>
+            <p>{{ comment.create_date }}</p>
+            <p>commented by: {{ comment.author }}</p>
+            {% if user.is_authenticated %}
+            {% if comment.approved_comment %}
+            <a href="{% url 'blog_app:comment_remove' pk=comment.pk %}" class="btn outline delete">Delete</a>
+            {% else %}
+            <a href="{% url 'blog_app:comment_approve' pk=comment.pk %}" class="btn ">Post</a>
+            <a href="{% url 'blog_app:comment_remove' pk=comment.pk %}" class="btn delete">Cancel</a>
+            {% endif %}
+            {% endif %}
+        </div>
         {% endfor %}
         {% else %}
         <p>No comments yet.</p>

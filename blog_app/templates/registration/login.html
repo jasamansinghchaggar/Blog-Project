@@ -1,17 +1,25 @@
 {% extends 'blog_app/base.html' %}
 {% block body_block %}
-<h2>Please Login</h2>
-<form method="post" action="{% url 'user_login' %}">
-    {% csrf_token %}
-    <div class="userName">
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username" required placeholder="Enter username" autocomplete="off">
+<div id="login">
+    <div class="log-container">
+        <h2 class="login-heading">Login</h2>
+        <form method="post" action="{% url 'user_login' %}">
+            {% csrf_token %}
+            <div class="userName field">
+                <label for="username">Username: </label>
+                <input type="text" name="username" id="username" required placeholder="Enter username"
+                    autocomplete="off">
+            </div>
+            <div class="passWord field">
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="password" required placeholder="Enter password"
+                    autocomplete="off">
+            </div>
+            <div class="sub-button">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
     </div>
-    <div class="passWord">
-        <label for="password">Password: </label>
-        <input type="password" name="password" id="password" required placeholder="Enter password"  autocomplete="off">
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
-<p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+</div>
 {% endblock %}

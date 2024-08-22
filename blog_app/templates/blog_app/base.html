@@ -12,24 +12,24 @@
 
 <body>
     <nav class="navbar">
-        <a class="logo" href="{% url 'blog_app:post_list' %}">Blogger</a>
+        <a class="logo" href="{% url 'blog_app:post_list' %}">B.</a>
         <div class="nav-links">
             <ul>
                 <li>
-                    <a href="{% url 'blog_app:about' %}">About</a>
+                    <a class="other-links" href="{% url 'blog_app:about' %}">About</a>
                 </li>
                 <li>
-                    <a href="https://github.com/jasamansinghchaggar">GitHub</a>
+                    <a class="other-links" href="https://github.com/jasamansinghchaggar">GitHub</a>
                 </li>
                 <li>
-                    <a href="https://www.linkedin.com/in/jasamansinghchaggar">LinkedIn</a>
+                    <a class="other-links" href="https://www.linkedin.com/in/jasamansinghchaggar">LinkedIn</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'blog_app:post_new' %}">Create Post</a>
+                    <a class="other-links" href="{% url 'blog_app:post_new' %}">Create Post</a>
                 </li>
                 <li>
-                    <a href="{% url 'blog_app:draft_list' %}">Drafts</a>
+                    <a class="other-links" href="{% url 'blog_app:draft_list' %}">Drafts</a>
                 </li>
                 <li>
                     <a class="logging" href="{% url 'user_logout' %}">Logout</a>

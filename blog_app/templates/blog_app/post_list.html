@@ -1,17 +1,26 @@
 {% extends 'blog_app/base.html' %}
 {% block body_block %}
+<div id="postList">
     <h1>Blog Posts</h1>
     {% if post_list %}
     {% for post in post_list %}
-    <div class="post">
-        <h1><a href="{% url 'blog_app:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-        <div class="date">
-            <p>Published on: {{ post.published_date }}</p>
+    <a href="{% url 'blog_app:post_detail' pk=post.pk %}">
+        <div class="post">
+            <h2>
+                {{ post.title }}
+            </h2>
+            <div class="author">
+                <p>Author: {{ post.author }}</p>
+            </div>
+            <div class="date">
+                <p>Published on: {{ post.published_date }}</p>
+            </div>
+            <a class="cmt-count" href="{% url 'blog_app:post_detail' pk=post.pk %}">Comments: {{ post.comments.count}}</a>
         </div>
-        <a href="{% url 'blog_app:post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
-    </div>
-    {% endfor %}
-    {% else %}
-    <p>No posts uploaded.</p>
-    {% endif %}
+        {% endfor %}
+        {% else %}
+        <p class="nothing">No posts uploaded.</p>
+        {% endif %}
+    </a>
+</div>
 {% endblock %}

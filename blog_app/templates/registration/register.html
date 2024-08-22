@@ -1,31 +1,42 @@
 {% extends 'blog_app/base.html' %}
 {% block body_block %}
-<h2>Register</h2>
-<form method="post" action="{% url 'register' %}">
-    {% csrf_token %}
-    <div class="firstName">
-        <label for="first_name">First Name: </label>
-        <input type="text" name="first_name" id="first_name" required placeholder="Enter first name" autocomplete="off">
+<div id="register">
+    <div class="reg-container">
+        <h2 class="reg-heading">Register</h2>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="firstName field">
+                <label for="first_name">First Name: </label>
+                <input type="text" name="first_name" id="first_name" required placeholder="Enter first name"
+                    autocomplete="off">
+            </div>
+            <div class="lastName field">
+                <label for="last_name">Last Name: </label>
+                <input type="text" name="last_name" id="last_name" required placeholder="Enter last name"
+                    autocomplete="off">
+            </div>
+            <div class="email field">
+                <label for="email">Email: </label>
+                <input type="email" name="email" id="email" required placeholder="Enter email" autocomplete="off">
+            </div>
+            <div class="userName field">
+                <label for="username">Username: </label>
+                <input type="text" name="username" id="username" required placeholder="Enter username"
+                    autocomplete="off">
+                {% if error_message %}
+                <span style="color: red;">{{ error_message }}</span>
+                {% endif %}
+            </div>
+            <div class="passWord field">
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="password" required placeholder="Enter password"
+                    autocomplete="off">
+            </div>
+            <div class="sub-button">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </form>
+        <p>Already have an account? <a href="{% url 'user_login' %}">Log in</a></p>
     </div>
-    <div class="lastName">
-        <label for="last_name">Last Name: </label>
-        <input type="text" name="last_name" id="last_name" required placeholder="Enter last name" autocomplete="off">
-    </div>
-    <div class="email">
-        <label for="email">Email: </label>
-        <input type="email" name="email" id="email" required placeholder="Enter email" autocomplete="off">
-    </div>
-    <div class="userName">
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username" required placeholder="Enter username" autocomplete="off">
-        {% if error_message %}
-        <span style="color: red;">{{ error_message }}</span>
-        {% endif %}
-    </div>
-    <div class="passWord">
-        <label for="password">Password: </label>
-        <input type="password" name="password" id="password" required placeholder="Enter password" autocomplete="off">
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+</div>
 {% endblock %}
