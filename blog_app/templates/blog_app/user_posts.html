@@ -1,18 +1,20 @@
 {% extends 'blog_app/base.html' %}
 
 {% block body_block %}
-<h2>Your Posts</h2>
-{% if posts %}
+<div id="userposts">
+    <h2>Your Posts</h2>
+    {% if posts %}
     <ul>
         {% for post in posts %}
-            <li>
-                <a href="{% url 'blog_app:post_detail' pk=post.pk %}">{{ post.title }}</a>
-                <p>{{ post.text|truncatewords:30 }}</p>
-                <p>Published on: {{ post.published_date }}</p>
-            </li>
+        <li>
+            <a href="{% url 'blog_app:post_detail' pk=post.pk %}">{{ post.title }}</a>
+            <p>{{ post.text|truncatewords:30 }}</p>
+            <p>Published on: {{ post.published_date }}</p>
+        </li>
         {% endfor %}
     </ul>
-{% else %}
+    {% else %}
     <p>You have not created any posts yet.</p>
-{% endif %}
+    {% endif %}
+</div>
 {% endblock %}

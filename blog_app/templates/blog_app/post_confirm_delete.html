@@ -1,13 +1,13 @@
-<!DOCTYPE html>
 {% extends 'blog_app/base.html' %}
 {% block body_block %}
-<div class="jumbotron">
+<div id="postdelete">
     <h1>Are you sure you want to delete "{{ object }}"?</h1>
-    <form method="POST">
+    <form method="POST" class="post-form">
         {% csrf_token %}
-        <button type="submit">Yes</button>
-        <a href="{% url 'blog_app:post_detail' pk=post.pk %}" class="btn btn-default">No</a>
+        <div class="btns">
+            <button type="submit">Yes</button>
+            <a href="{% url 'blog_app:post_detail' pk=post.pk %}" class="btn btn-default">No</a>
+        </div>
     </form>
-    
 </div>
 {% endblock %}

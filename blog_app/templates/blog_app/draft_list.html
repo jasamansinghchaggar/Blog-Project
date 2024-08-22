@@ -1,5 +1,6 @@
 {% extends 'blog_app/base.html' %}
 {% block body_block %}
+<div id="draft">
     <h1>Drafts</h1>
     {% if draft_list %}
     {% for post in draft_list %}
@@ -12,4 +13,5 @@
     {% else %}
     <p>No drafts uploaded.</p>
     {% endif %}
+</div>
 {% endblock %}

@@ -374,3 +374,383 @@ a {
     font-size: 3rem;
   }
 }
+
+#userposts {
+  min-height: 90%;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: beige;
+  border-radius: 10px;
+}
+
+#userposts h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+#userposts ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#userposts li {
+  min-height: max-content;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: black;
+  border-radius: 10px;
+}
+
+#userposts li h3 {
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+#userposts li p {
+  color: #c8c8c8;
+  font-size: 1rem;
+}
+
+#userposts li p:last-of-type {
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+#userposts a {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+#userposts a:hover {
+  color: beige;
+}
+
+#userposts .no-posts {
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+#postcreate {
+  min-height: max-content;
+  width: 60%;
+  padding: 2rem;
+  background-color: beige;
+  border-radius: 10px;
+}
+
+#postcreate h1 {
+  padding-bottom: 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+#postcreate .post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#postcreate .post-form p {
+  font-size: 1.2rem;
+  color: black;
+}
+
+#postcreate .post-form label {
+  font-size: 1.2rem;
+  color: black;
+}
+
+#postcreate .post-form input[type="text"],
+#postcreate .post-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #f3f3eb;
+  overflow-y: scroll;
+}
+
+#postcreate .post-form input[type="text"]:focus,
+#postcreate .post-form textarea:focus {
+  outline: none;
+  border-color: #3c3c3c;
+}
+
+#postcreate .post-form button {
+  width: 10%;
+  border: none;
+  background-color: black;
+  color: beige;
+  padding: 0.7rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#postcreate .post-form button:hover {
+  background-color: beige;
+  color: black;
+  border: 1px solid black;
+}
+
+#draft {
+  min-height: 90%;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+#draft h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+#draft .post {
+  min-height: max-content;
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+}
+
+#draft .post h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+#draft .post a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#draft .post a:hover {
+  color: beige;
+}
+
+#draft .post .date {
+  color: #c8c8c8;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#draft .post p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+
+#draft p {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: black;
+  font-weight: 500;
+}
+
+#postedit {
+  min-height: max-content;
+  width: 60%;
+  padding: 2rem;
+  background-color: beige;
+  border-radius: 10px;
+}
+
+#postedit h1 {
+  padding-bottom: 1rem;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+#postedit .post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#postedit .post-form p {
+  font-size: 1.2rem;
+  color: black;
+}
+
+#postedit .post-form label {
+  font-size: 1.2rem;
+  color: black;
+}
+
+#postedit .post-form input[type="text"],
+#postedit .post-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #f3f3eb;
+  overflow-y: scroll;
+}
+
+#postedit .post-form input[type="text"]:focus,
+#postedit .post-form textarea:focus {
+  outline: none;
+  border-color: #3c3c3c;
+}
+
+#postedit .post-form .btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#postedit .post-form button {
+  width: 10%;
+  border: none;
+  background-color: black;
+  color: beige;
+  padding: 0.7rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#postedit .post-form button:hover {
+  background-color: beige;
+  color: black;
+  border: 1px solid black;
+}
+
+#postedit .post-form .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12%;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  border-radius: 5px;
+}
+
+#postdelete {
+  min-height: max-content;
+  width: 100%;
+  padding: 2rem;
+  background-color: beige;
+  border-radius: 10px;
+}
+
+#postdelete h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+#postdelete form {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+#postdelete .post-form .btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+#postdelete .post-form button {
+  width: max-content;
+  border: none;
+  background-color: black;
+  color: red;
+  padding: 0.7rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#postdelete .post-form button:hover {
+  background-color: beige;
+  border: 1px solid black;
+}
+
+#postdelete .post-form .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  border-radius: 5px;
+}
+
+#commentform {
+  min-height: max-content;
+  width: 60%;
+  padding: 2rem;
+  background-color: beige;
+  border-radius: 10px;
+}
+
+#commentform h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+#commentform .post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#commentform .post-form p {
+  font-size: 1.2rem;
+  color: black;
+}
+
+#commentform .post-form label {
+  font-size: 1.2rem;
+  color: black;
+}
+
+#commentform .post-form input[type="text"],
+#commentform .post-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #f3f3eb;
+  overflow-y: scroll;
+}
+
+#commentform .post-form input[type="text"]:focus,
+#commentform .post-form textarea:focus {
+  outline: none;
+  border-color: #3c3c3c;
+}
+
+#commentform button {
+  background-color: black;
+  width: max-content;
+  color: beige;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+}
+
+#commentform button:hover {
+  background-color: beige;
+  color: black;
+}

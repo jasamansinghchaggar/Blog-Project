@@ -113,6 +113,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         form.instance.published_date = timezone.now()
+        form.instance.published_date = None 
+        form.save()
         return super().form_valid(form)
 
 
