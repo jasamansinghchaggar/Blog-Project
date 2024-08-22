@@ -15,11 +15,16 @@
                 <input type="password" name="password" id="password" required placeholder="Enter password"
                     autocomplete="off">
             </div>
+            <div class="remember-chk">
+                <label for="remember_me">Remember Me:</label>
+                <input type="checkbox" name="remember_me" id="remember_me">
+            </div>
             <div class="sub-button">
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit">Login</button>
             </div>
         </form>
         <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+        <p>Want to enter as a guest? <a href="{% url 'blog_app:post_list' %}">Guest Login</a></p>
     </div>
 </div>
 {% endblock %}

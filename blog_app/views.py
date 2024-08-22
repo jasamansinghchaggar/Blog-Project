@@ -1,15 +1,14 @@
-from multiprocessing import context
 from django.shortcuts import render, get_object_or_404, redirect
 from blog_app.forms import PostForm, CommentForm
 from blog_app.models import Post, Comment
 from django.utils import timezone
 from django.urls import reverse, reverse_lazy
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib import messages
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -21,52 +20,36 @@ from django.views.generic import (
 
 # Create your views here.
 
-# def user_login(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-
-#         user = authenticate(username=username, password=password)
-
-#         if user:
-#             if user.is_active:
-#                 login(request, user)
-#                 return HttpResponseRedirect(reverse('blog_app:post_list'))
-#             else:
-#                 return HttpResponse('Account not found!')
-#         else:
-#             print('Someone tried to login and failed')
-#             print('Username: {} and password {}'.format(username, password))
-#             return HttpResponse('Invalid login details supplied')
-#     else:
-#         return render(request, 'registration/login.html', {})
-
 
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse("blog_app:post_list"))
+    return HttpResponseRedirect(reverse("user_login"))
 
 
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-
+        remember_me = request.POST.get("remember_me")
         user = authenticate(username=username, password=password)
 
         if user:
             if user.is_active:
                 login(request, user)
+
+                if remember_me:
+                    request.session.set_expiry(2592000) 
+                else:
+                    request.session.set_expiry(0)
+
                 return HttpResponseRedirect(reverse("blog_app:post_list"))
             else:
                 return HttpResponse("Account not found!")
         else:
-            print("Someone tried to login and failed")
-            print("Username: {} and password {}".format(username, password))
-            return HttpResponse("Invalid login details supplied")
+            return HttpResponse("Invalid login details")
     else:
-        return render(request, "registration/login.html", {})
+        return render(request, "registration/login.html")
 
 
 def register(request):
@@ -93,7 +76,9 @@ def register(request):
             user.save()
             messages.success(request, "Account created successfully")
             return redirect("user_login")
-    return render(request, "registration/register.html", {"error_message": error_message})
+    return render(
+        request, "registration/register.html", {"error_message": error_message}
+    )
 
 
 class AboutView(TemplateView):
@@ -120,20 +105,23 @@ class PostDetailView(DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     login_url = "/login/"
     redirect_field_name = "blog_app/post_list.html"
-    form_class = PostForm
     model = Post
     template_name = "blog_app/post_form.html"
     context_object_name = "post"
-    # fields = ['author', 'title', 'text']
+    fields = ["title", "text"]
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.published_date = timezone.now()
+        return super().form_valid(form)
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     login_url = "/login/"
     redirect_field_name = "blog_app/post_detail.html"
-    form_class = PostForm
     model = Post
     template_name = "blog_app/post_update.html"
-    # fields = ['author', 'title', 'text']
+    fields = ['title', 'text']
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
@@ -159,6 +147,12 @@ def post_publish(request, pk):
     post.publish()
 
     return redirect("blog_app:post_detail", pk=pk)
+
+
+@login_required
+def user_posts(request):
+    posts = Post.objects.filter(author=request.user)
+    return render(request, "blog_app/user_posts.html", {"posts": posts})
 
 
 # Comment views

@@ -25,8 +25,8 @@ class Post(models.Model):
     
 class Comment(models.Model):
     post = models.ForeignKey('blog_app.Post', on_delete=models.CASCADE, related_name='comments')
-    author = models.CharField(max_length=100)
-    text = models.CharField(max_length=1000)
+    name = models.CharField(max_length=100)
+    comment = models.CharField(max_length=1000)
     create_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
 
@@ -43,4 +43,4 @@ class Comment(models.Model):
         return reverse('post_list')
     
     def __str__(self):
-        return self.text[:10]
+        return self.comment[:10]

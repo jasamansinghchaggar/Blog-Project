@@ -26,6 +26,9 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li>
+                    <a class="other-links" href="{% url 'blog_app:user_posts' %}">My Posts</a>
+                </li>
+                <li>
                     <a class="other-links" href="{% url 'blog_app:post_new' %}">Create Post</a>
                 </li>
                 <li>
@@ -48,7 +51,7 @@
         {% endblock %}
     </div>
 
-    <script src="{% static 'js/main.js' %}"></script>
+    <!-- <script src="{% static 'js/main.js' %}"></script> -->
 </body>
 
 </html>

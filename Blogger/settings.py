@@ -60,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'blog_app.middleware.EnsureProfileMiddleware',
 ]
 
 ROOT_URLCONF = 'Blogger.urls'
@@ -138,4 +139,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'blog_app/post_list.html'
+LOGIN_URL = '/login/'
+
+LOGIN_REDIRECT_URL = '/post_list/'

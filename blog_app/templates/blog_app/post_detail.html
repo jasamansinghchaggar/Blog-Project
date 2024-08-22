@@ -16,12 +16,14 @@
         <a href="{% url 'blog_app:post_publish' pk=post.pk %}" class="btn ">Publish</a>
         {% endif %}
         {% if post.published_date %}
+        {% if user == post.author %}
         <a href="{% url 'blog_app:post_edit' pk=post.pk %}" class="btn ">Update</a>
         <a href="{% url 'blog_app:post_remove' pk=post.pk %}" class="btn delete">Delete</a>
+        {% endif %}
+        {% endif %}
+        {% endif %}
         <hr>
         <a href="{% url 'blog_app:post_comment' pk=post.pk  %}" class="btn outline">Add comment</a>
-        {% endif %}
-        {% endif %}
     </div>
 
     <div class="comments">
