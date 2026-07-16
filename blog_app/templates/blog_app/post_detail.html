@@ -1,51 +1,15 @@
 {% extends 'blog_app/base.html' %}
+{% block title %}{{ post.title }} — Blogger{% endblock %}
 {% block body_block %}
-<div id="postdetail">
-    <div class="detail">
-        <h1>{{ post.title }}</h1>
-        {% if post.published_date %}
-        <div>
-            <p>Published: {{ post.published_date }}</p>
-        </div>
-        {% else %}
-        {% endif %}
-        <p class="post-text"> {{ post.text }} </p>
-
-        {% if user.is_authenticated %}
-        {% if not post.published_date %}
-        <a href="{% url 'blog_app:post_publish' pk=post.pk %}" class="btn ">Publish</a>
-        {% endif %}
-        {% if post.published_date %}
-        {% if user == post.author %}
-        <a href="{% url 'blog_app:post_edit' pk=post.pk %}" class="btn ">Update</a>
-        <a href="{% url 'blog_app:post_remove' pk=post.pk %}" class="btn delete">Delete</a>
-        {% endif %}
-        {% endif %}
-        {% endif %}
-        <hr>
-        <a href="{% url 'blog_app:post_comment' pk=post.pk  %}" class="btn outline">Add comment</a>
-    </div>
-
-    <div class="comments">
-        {% if post.comments.all %}
-        {% for comment in post.comments.all %}
-        <div class="comment">
-            <h3>{{ comment.text }}</h3>
-            <p>{{ comment.create_date }}</p>
-            <p>commented by: {{ comment.author }}</p>
-            {% if user.is_authenticated %}
-            {% if comment.approved_comment %}
-            <a href="{% url 'blog_app:comment_remove' pk=comment.pk %}" class="btn outline delete">Delete</a>
-            {% else %}
-            <a href="{% url 'blog_app:comment_approve' pk=comment.pk %}" class="btn ">Post</a>
-            <a href="{% url 'blog_app:comment_remove' pk=comment.pk %}" class="btn delete">Cancel</a>
-            {% endif %}
-            {% endif %}
-        </div>
-        {% endfor %}
-        {% else %}
-        <p>No comments yet.</p>
-        {% endif %}
-    </div>
-</div>
+<article class="article-page">
+    <div class="article-kicker"><a href="{% url 'blog_app:post_list' %}"><i class="bi bi-arrow-left"></i> Back to stories</a><span>Essay</span></div>
+    <header class="article-header"><h1>{{ post.title }}</h1><div class="article-byline"><span class="author-chip large">{{ post.author.username|first|upper }}</span><div><strong>{{ post.author }}</strong><span>{% if post.published_date %}Published {{ post.published_date|date:"F d, Y" }}{% else %}Unpublished draft{% endif %}</span></div></div></header>
+    <div class="article-layout"><div class="article-body"><p>{{ post.text }}</p></div><aside class="article-actions">
+        {% if user.is_authenticated and not post.published_date %}<a href="{% url 'blog_app:post_publish' pk=post.pk %}" class="button primary"><i class="bi bi-send"></i> Publish</a>{% endif %}
+        {% if user.is_authenticated and post.published_date and user == post.author %}<a href="{% url 'blog_app:post_edit' pk=post.pk %}" class="button secondary"><i class="bi bi-pencil"></i> Edit story</a><a href="{% url 'blog_app:post_remove' pk=post.pk %}" class="button danger"><i class="bi bi-trash3"></i> Delete</a>{% endif %}
+    </aside></div>
+    <section class="comments-section"><div class="section-heading compact"><div><span class="eyebrow">Responses</span><h2>{{ post.comments.count }} comment{{ post.comments.count|pluralize }}</h2></div><a class="button secondary" href="{% url 'blog_app:post_comment' pk=post.pk %}"><i class="bi bi-plus-lg"></i> Add comment</a></div>
+        {% if post.comments.all %}{% for comment in post.comments.all %}<div class="comment-card"><div class="comment-avatar">{{ comment.name|first|upper }}</div><div class="comment-content"><div class="comment-heading"><strong>{{ comment.name }}</strong><span>{{ comment.create_date|date:"M d, Y" }}</span></div><p>{{ comment.comment }}</p>{% if user.is_authenticated %}<div class="comment-actions">{% if not comment.approved_comment %}<a href="{% url 'blog_app:comment_approve' pk=comment.pk %}">Approve</a>{% endif %}<a class="danger-text" href="{% url 'blog_app:comment_remove' pk=comment.pk %}">Remove</a></div>{% endif %}</div></div>{% endfor %}{% else %}<div class="empty-comments"><i class="bi bi-chat-left"></i><p>No responses yet. Start the conversation.</p></div>{% endif %}
+    </section>
+</article>
 {% endblock %}

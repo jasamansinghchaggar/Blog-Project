@@ -1,11 +1,3 @@
 {% extends 'blog_app/base.html' %}
-{% block body_block %}
-<div id="postcreate">
-    <h1>New Post</h1>
-    <form method="POST" class="post-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-</div>
-{% endblock %}
+{% block title %}New post — Blogger{% endblock %}
+{% block body_block %}<section class="editor-page"><div class="editor-heading"><div class="eyebrow"><span class="eyebrow-line"></span> Your next story</div><h1>Write something<br><em>worth keeping.</em></h1><p>Take your time. The best ideas rarely arrive in a hurry.</p></div><form method="POST" class="editor-card form-stack">{% csrf_token %}{{ form.as_p }}<div class="editor-footer"><span><i class="bi bi-lock"></i> Saved privately as a draft</span><button class="button primary" type="submit">Save draft <i class="bi bi-arrow-right"></i></button></div></form></section>{% endblock %}

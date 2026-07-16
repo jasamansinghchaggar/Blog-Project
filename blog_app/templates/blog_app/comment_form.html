@@ -1,11 +1,3 @@
 {% extends 'blog_app/base.html' %}
-{% block body_block %}
-<div id="commentform">
-    <h1>New Comment:</h1>
-    <form class="post-form" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add</button>
-    </form>
-</div>
-{% endblock %}
+{% block title %}Add a comment — Blogger{% endblock %}
+{% block body_block %}<section class="form-page"><div class="form-page-heading"><span class="eyebrow">Join the conversation</span><h1>Leave a response.</h1><p>Thoughtful replies make good writing better.</p></div><form class="editor-card form-stack" method="post">{% csrf_token %}{{ form.as_p }}<div class="editor-footer"><a class="button secondary" href="javascript:history.back()">Cancel</a><button class="button primary" type="submit">Add response <i class="bi bi-arrow-right"></i></button></div></form></section>{% endblock %}

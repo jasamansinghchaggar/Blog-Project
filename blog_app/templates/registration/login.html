@@ -1,30 +1,3 @@
 {% extends 'blog_app/base.html' %}
-{% block body_block %}
-<div id="login">
-    <div class="log-container">
-        <h2 class="login-heading">Login</h2>
-        <form method="post" action="{% url 'user_login' %}">
-            {% csrf_token %}
-            <div class="userName field">
-                <label for="username">Username: </label>
-                <input type="text" name="username" id="username" required placeholder="Enter username"
-                    autocomplete="off">
-            </div>
-            <div class="passWord field">
-                <label for="password">Password: </label>
-                <input type="password" name="password" id="password" required placeholder="Enter password"
-                    autocomplete="off">
-            </div>
-            <div class="remember-chk">
-                <input type="checkbox" name="remember_me" id="remember_me">
-                <label for="remember_me">Remember Me</label>
-            </div>
-            <div class="sub-button">
-                <button type="submit">Login</button>
-            </div>
-        </form>
-        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
-        <p>Want to enter as a guest? <a href="{% url 'blog_app:post_list' %}">Guest Login</a></p>
-    </div>
-</div>
-{% endblock %}
+{% block title %}Sign in — Blogger{% endblock %}
+{% block body_block %}<section class="auth-layout"><div class="auth-intro"><div class="eyebrow"><span class="eyebrow-line"></span> Welcome back</div><h1>Pick up where<br><em>you left off.</em></h1><p>Your next good idea might already be waiting in your drafts.</p></div><div class="auth-card"><div class="auth-card-heading"><span class="eyebrow">Member access</span><h2>Sign in</h2></div><form method="post" action="{% url 'user_login' %}" class="form-stack">{% csrf_token %}<div class="form-field"><label for="username">Username</label><input type="text" name="username" id="username" required placeholder="your username" autocomplete="username"></div><div class="form-field"><label for="password">Password</label><input type="password" name="password" id="password" required placeholder="your password" autocomplete="current-password"></div><label class="check-row"><input type="checkbox" name="remember_me" id="remember_me"><span>Keep me signed in</span></label><button class="button primary full-width" type="submit">Sign in <i class="bi bi-arrow-right"></i></button></form><p class="auth-switch">New here? <a href="{% url 'register' %}">Create an account</a></p><p class="guest-link"><a href="{% url 'blog_app:post_list' %}">Continue as a guest <i class="bi bi-arrow-up-right"></i></a></p></div></section>{% endblock %}
