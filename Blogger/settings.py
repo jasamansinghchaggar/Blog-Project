@@ -37,7 +37,7 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-dev-key-change-me')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost', 'blog.jasaman.me'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost', 'blog.jasaman.me', '.vercel.app'])
 
 
 # Application definition
@@ -88,10 +88,7 @@ WSGI_APPLICATION = 'Blogger.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": env.db()
 }
 
 
