@@ -13,17 +13,17 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import environ
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # Initialize environment variables
 env = environ.Env(
     # set default values and casting
     DEBUG=(bool, False)
 )
 
-# Reading .env file
-environ.Env.read_env()
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Reading .env file from the project root.
+environ.Env.read_env(BASE_DIR / '.env')
 TEMP_DIR = BASE_DIR / 'blog_app/templates/blog_app'
 STATIC_DIR = BASE_DIR / 'blog_app/static'
 
@@ -32,12 +32,12 @@ STATIC_DIR = BASE_DIR / 'blog_app/static'
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', default='django-insecure-dev-key-change-me')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost', 'blog.jasaman.me'])
 
 
 # Application definition
@@ -129,7 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR
 ]
